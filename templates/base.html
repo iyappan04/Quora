@@ -1,0 +1,130 @@
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+
+	<script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+	<title>
+		{% block title %}{% endblock %} 
+	</title>
+
+
+    <style>
+		
+		input{
+			outline: none;
+			border: none;
+			padding: 10px 10px !important;
+			border: 2px solid black;
+			border-radius: 10px;
+		}
+
+		textarea{
+			outline: none;
+			border: none;
+			padding: 10px 10px !important;
+			border: 2px solid black;
+			border-radius: 10px;
+		}
+
+		select{
+			outline: none;
+			border: none;
+			padding: 10px 10px !important;
+			border: 2px solid black;
+			border-radius: 10px;
+		}
+
+		input::checkbox{
+			outline: none;
+			border: none;
+			padding: 10px 10px !important;
+			border: 2px solid black;
+			border-radius: 10px;
+		}
+
+		* {
+		  font-family: "Montserrat", sans-serif;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="container mx-auto max-w-4xl">
+		<div class="flex items-center justify-between px-10 py-3">
+			<a class="flex items-center gap-2" href="/">
+				<img width="28" height="28" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/external-quora-social-media-tanah-basah-glyph-tanah-basah-2.png" alt="external-quora-social-media-tanah-basah-glyph-tanah-basah-2"/>
+				<p class="text-base font-extrabold">uora</p>
+			</a>
+
+			<div class="flex items-center gap-2">
+				{% if request.user.is_authenticated %}
+					<div class="flex items-center gap-4">
+
+						<div class="flex items-center gap-5">
+							<li class="text-xs list-none font-bold"><a href="{% url 'quora:ask_question' %}"><i class="fas fa-edit"></i> New Question</a></li>
+							<li class="text-xs list-none font-bold"><a href="{% url 'quora:show_fav_ques' %}"><i class="fas fa-star"></i> Favourites</a></li>
+	
+						</div>
+					
+
+						<a class="flex items-center gap-2" href="{% url 'quora:profilepage' username=user.username %}">
+							{% if request.user.profile.photo %}
+								<img src="{{ request.user.profile.photo.url }}" width="23" height="23" class="rounded-full" alt="profilePic">
+							{% else %}
+								<img width="28" height="28" src="https://img.icons8.com/fluency-systems-filled/48/user-male-circle.png" alt="user-male-circle" class="cursor-pointer" />
+							{% endif %}
+							<p class="text-xs font-bold">{{ request.user }}</p>
+						</a>
+
+						<div class="flex items-center gap-2">
+							<a href="{% url 'quora:user_logout' %}"><p class="text-xs font-semibold">Logout</p></a>
+						</div>
+
+						
+					</div>
+					
+				{% else %}
+				<div class="flex items-center gap-4">
+					<div class="flex items-center gap-2">
+						<a href="{% url 'quora:user_login' %}"><p class="text-sm font-semibold">Login</p></a>
+					</div>	
+					<div class="flex items-center gap-2">
+						<a href="{% url 'quora:register' %}"><p class="text-sm font-semibold">Register</p></a>
+					</div>
+				</div>	
+				{% endif %}
+			</div>
+
+		</div>	
+	</div>
+
+	<div class="container mx-auto max-w-4xl">
+		{% block content %}
+		{% endblock %}
+	</div>
+	
+</body>
+</html>

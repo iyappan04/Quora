@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="flex items-center justify-center">
+	<div class="px-10 py-6 lg:w-[60%]">
+		<h1 class="text-center text-2xl font-extrabold">Create a new account</h1>
+			<form method="POST" class="flex flex-col gap-3 mt-10">
+				{% csrf_token %}
+				{{ form }}
+				<div>
+					<input type="submit" class="bg-black text-white px-6 py-2 mb-2" name="submit" value='Register'>
+				</div>
+			</form>
+		<br>
+		<h5 class="text-center">OR</h5>
+		<br>
+		<a class="text-center underline" href="{% url 'quora:register' %}">Or Log into an existing account!</a>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile | {{ block.super }}{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-center">
+	<div class="px-11 py-6 lg:w-[100%]">
+		<form method="POST"  class="flex flex-col gap-2" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ user_form }}
+			{{ profile_form }}
+			<input type="submit" class="btn btn-primary mb-2" name="submit" value="Save Changes!">
+			<a class="btn btn-secondary mb-2" href="{% url 'quora:profilepage' username=user.username %}">Discard Changes!</a>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

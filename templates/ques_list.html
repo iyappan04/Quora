@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% block title %}{{block.super}}{% endblock %}
+
+
+<div class="px-10 pt-10">
+	<h2 class="text-8xl font-extrabold pb-20 text-center">Feeds</h2>
+
+	{% for q in ques %}
+		<div class="px-4 py-4 border-2 rounded-xl flex flex-col gap-4">
+
+			<a class="flex items-center gap-2" href="{% url 'quora:profilepage' q.author %}">
+				{% if request.user.profile.photo %}
+					<img src="{{ request.user.profile.photo.url }}" width="23" height="23" class="rounded-full" alt="profilePic">
+				{% else %}
+					<img width="28" height="28" src="https://img.icons8.com/fluency-systems-filled/48/user-male-circle.png" alt="user-male-circle" class="rounded-full"  />
+				{% endif %}
+				<p class="text-xs font-bold">{{q.author}}</p>
+
+				<div>
+					<span style="text-transform: capitalize;" class="ml-6 bg-black text-white text-xs font-bold rounded-lg px-2 py-0.5">{{q.status}}</span></p>
+				</div>
+
+			</a>
+
+			{% comment %} <p><strong>Author: </strong><a href="{% url 'quora:profilepage' q.author %}">{{q.author}}</a> {% endcomment %}
+			<div class="px-1 flex flex-col gap-3">
+
+				
+				<h2 class="font-bold text-base font-bold"><p><a style="color: black;" href="{% url 'quora:ques_detail' q.id %}">{{q.title}}</a></h2>
+				
+				<h6 class="text-sm">{{q.body}}</h6>
+
+				<p>
+					<span>
+						<span class="text-xs">Created: {{q.created}}</span>
+						<span class="text-xs">Updated: {{q.updated}}</span>
+						
+					</span>
+				</p>
+
+			</div>
+			
+		</div>
+		<br>
+		
+	{% endfor %}
+</div>
+{% endblock %}
