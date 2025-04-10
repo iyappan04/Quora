@@ -10,8 +10,8 @@
 			<div class="px-4 py-4 border-2 rounded-xl flex flex-col gap-4">
 
 				<a class="flex items-center gap-2" href="{% url 'quora:profilepage' q.author %}">
-					{% if request.user.profile.photo %}
-						<img src="{{ request.user.profile.photo.url }}" width="23" height="23" class="rounded-full" alt="profilePic">
+					{% if q.author.profile.photo %}
+						<img src="{{ q.author.profile.photo.url }}" width="23" height="23" class="rounded-full" alt="profilePic">
 					{% else %}
 						<img width="28" height="28" src="https://img.icons8.com/fluency-systems-filled/48/user-male-circle.png" alt="user-male-circle" class="rounded-full"  />
 					{% endif %}
